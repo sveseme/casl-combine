@@ -18,16 +18,16 @@ enum Fields {
   ALL = "all",
 }
 
-function a1(): Ability {
+function a1() {
   const { can, rules } = new AbilityBuilder<Ability>();
   can(Actions.CREATE, Subjects.SETTINGS);
-  return new Ability(rules);
+  return rules;
 }
 
-function a2(): Ability {
+function a2() {
   const { can, rules } = new AbilityBuilder<Ability>();
   can(Actions.UPDATE, Subjects.SETTINGS, { ownerId: 23 });
-  return new Ability(rules);
+  return rules;
 }
 
 function combined(): Ability {
@@ -35,6 +35,5 @@ function combined(): Ability {
   const ab2 = a2();
 
   // How to combine ab1 and a2b?
-  return ???
+  return new Ability(ab1.concat(ab2));
 }
-
